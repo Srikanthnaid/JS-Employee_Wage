@@ -1,4 +1,4 @@
-/*UC5
+/*UC6
 Calculate Wages till a condition of total working hours of 160 or
 max days of 20 is reached for a month
 */
@@ -22,18 +22,26 @@ switch(empCheck) {
 }
 }
 
+//Calculate daily wage method
+function CalcDailyWage(empHrs){
+    return empHrs * WAGE_PER_HOUR;
+}
+
 //initialize variables
+let empHrs = 0;
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
+let empDailyWageArr = new Array();
 
 while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NO_OF_WORKING_DAYS) {
     totalWorkingDays++;
     let empCheck = Math.floor(Math.random() * 10) % 3;
     totalEmpHrs += getWorkingHrs(empCheck);
+    empDailyWageArr.push(CalcDailyWage(empHrs));
 }
 
-let empWage = totalEmpHrs * WAGE_PER_HOUR;//calculating employee wage
-//print Total days,Total hrs and empWage   
+let empWage = CalcDailyWage(totalEmpHrs);//calling CalDailyWage method and store in empWage variable
+//print Total working days,Total employee hrs and empWage   
 console.log(`
 Total Days : ${totalWorkingDays}
 Total Hrs  : ${totalEmpHrs}
